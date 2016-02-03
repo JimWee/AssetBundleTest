@@ -1,6 +1,7 @@
 fileFormatVersion: 2
 guid: 367620916cf708845a888b3022d9e427
 TextureImporter:
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -49,3 +50,4 @@ TextureImporter:
   spritePackingTag: 
   userData: 
   assetBundleName: texture.unity3d
+  assetBundleVariant: 
