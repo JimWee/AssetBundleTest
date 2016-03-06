@@ -1,20 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 using UnityEditor;
 
 public class BuildAssetBundle : MonoBehaviour {
 
-    [MenuItem("AsssetBundles/BuildAssetBunldes")]
-    static void BuildAssetBundles()
+    [MenuItem("AsssetBundles/BuildAssetBunldes_LZMA")]
+    static void BuildAssetBundles_LZMA()
     {
-        BuildPipeline.BuildAssetBundles(AppConst.GetAssetBundleFolder());
+        BuildAssetBundleOptions buildOptions = BuildAssetBundleOptions.DisableWriteTypeTree;
+        BuildAssetBundles(buildOptions);
     }
 
-    [MenuItem("AsssetBundles/Get AssetBundle names")]
-    static void GetNames()
+    [MenuItem("AsssetBundles/BuildAssetBunldes_LZ4")]
+    static void BuildAssetBundles_LZ4()
     {
-        var names = AssetDatabase.GetAllAssetBundleNames();
-        foreach (var name in names)
-            Debug.Log("AssetBundle: " + name);
+        BuildAssetBundleOptions buildOptions = BuildAssetBundleOptions.DisableWriteTypeTree | BuildAssetBundleOptions.ChunkBasedCompression;
+        BuildAssetBundles(buildOptions);
+    }
+
+    static void BuildAssetBundles(BuildAssetBundleOptions buildOptions)
+    {
+        string outputPath = Path.Combine(AssetBundleUtility.AssetBundlesOutputFolder, AssetBundleUtility.GetPlatformName());
+        if (!Directory.Exists(outputPath))
+        {
+            Directory.CreateDirectory(outputPath);
+        }
+
+        BuildPipeline.BuildAssetBundles(outputPath, buildOptions, EditorUserBuildSettings.activeBuildTarget);
     }
 }
