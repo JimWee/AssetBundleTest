@@ -100,10 +100,6 @@ public class GameManager : MonoBehaviour {
         }
         mAssetBundles.Clear();
 
-        foreach (var item in mResources)
-        {
-            DestroyImmediate(item.Value, true);
-        }
         mResources.Clear();
 
         foreach (var item in mResourcesAB)
